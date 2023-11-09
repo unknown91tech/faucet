@@ -12,6 +12,9 @@ contract Faucet {
 
   receive() external payable{}
 
+  function addFunds() external payable{
+
+  }
 
   
 
