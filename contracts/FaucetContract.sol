@@ -11,17 +11,24 @@ contract Faucet {
     funders.push(msg.sender);
   }
  
-  function getallFunders() external view returns(address[] memory){
+  function getallFunders() public view returns(address[] memory){
     return funders;
   }
 
-
+  function getFundersAtIndex(uint8 index) external view returns(address){
+    // address[] memory _funders = this.getallFunders();  u can use external and call the function like this but it will use more gas
+    address[] memory _funders = getallFunders(); 
+    return _funders[index];
+  }
   
 
 }
 
 
 // const instance = await Faucet.deployed()
+// instance.addFunds({from: accounts[0] , value: "20000000000"})
+// instance.addFunds({from: accounts[1] , value: "20000000000"})
+
 
 // Block info
 // Nonce - a hash that when combined with the minHash proofs that
