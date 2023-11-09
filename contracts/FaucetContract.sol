@@ -5,31 +5,32 @@ contract Faucet {
   // private -> can be accesible only within the smart contract
   // internal -> can be accesible within smart contract and also derived smart contract
 
-  address[] public funders;
+    uint public numOfFunders;
+  mapping(uint => address) private funders;
 
   receive() external payable{}
 
   function addFunds() external payable{
-    funders.push(msg.sender);
+    uint index = numOfFunders++;
+    funders[index] = msg.sender;
   }
  
-  function getallFunders() public view returns(address[] memory){
-    return funders;
-  }
+  
 
-  function getFundersAtIndex(uint8 index) external view returns(address){
+  function getFunderAtIndex(uint8 index) external view returns(address){
     // address[] memory _funders = this.getallFunders();  u can use external and call the function like this but it will use more gas
-    address[] memory _funders = getallFunders(); 
-    return _funders[index];
+    
+    return funders[index];
   }
   
 
 }
 
 
-// const instance = await Faucet.deployed()
-// instance.addFunds({from: accounts[0] , value: "20000000000"})
-// instance.addFunds({from: accounts[1] , value: "20000000000"})
+// const instance = await Faucet.deployed();
+// instance.addFunds({from: accounts[0], value: "200000000"})
+// instance.addFunds({from: accounts[1], value: "200000000"})
+// instance.getFunderAtIndex(0)
 
 
 // Block info
