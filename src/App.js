@@ -17,7 +17,7 @@ function App() {
       const provider = await detectEthereumProvider();
 
       if (provider) {
-        provider.request({method: "eth_requestAccounts"})
+        // provider.request({method: "eth_requestAccounts"}) instead of this we are giving an option for connection
         setWeb3Api({
           web3: new Web3(provider),
           provider
@@ -48,14 +48,23 @@ function App() {
             <strong>Account: </strong>
           </span>
           <h1>
-            { account ? account : "not connected" }
+            { account 
+            ? account 
+            : <button className="button is-warning "
+                      onClick={() =>
+                        web3Api.provider.request({method: "eth_requestAccounts"}
+                      )}
+            >
+                Connect Wallet
+            </button>  
+            }
           </h1>
           <div className="balance-view is-size-2">
             Current Balance: <strong>10</strong> ETH
           </div>
           
-          <button className="btn mr-2">Donate</button>
-          <button className="btn">Withdraw</button>
+          <button className="button is-link is-light  mr-2">Donate</button>
+          <button className="button is-primary is-light ">Withdraw</button>
         </div>
       </div>
     </>
