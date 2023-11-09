@@ -11,7 +11,9 @@ contract Faucet {
     funders.push(msg.sender);
   }
  
-  
+  function getallFunders() external view returns(address[] memory){
+    return funders;
+  }
 
 
   
