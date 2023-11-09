@@ -1,27 +1,17 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.4.22 <0.9.0;
+import "./Owned.sol";
 
-contract Faucet {
+contract Faucet is Owned{
   // private -> can be accesible only within the smart contract
   // internal -> can be accesible within smart contract and also derived smart contract
 
     uint public numOfFunders;
-    address public owner;
 
   mapping(address => bool) private funders;
   mapping(uint =>address) private lutfunders;
 
-   constructor() {
-    owner = msg.sender;
-  }
-
-  modifier onlyOwner {
-    require(
-      msg.sender == owner,
-      "Only owner can call this function"
-    );
-    _;
-  }
+  
 
    modifier limitWithdraw(uint withdrawAmount) {
     require(
