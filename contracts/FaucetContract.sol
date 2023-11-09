@@ -6,3 +6,5 @@ contract Faucet {
   int public counter = -10;
   uint32 public test = 4294967295;
 }
+
+// const instance = await Faucet.deployed()
