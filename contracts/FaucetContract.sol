@@ -2,6 +2,31 @@
 pragma solidity >=0.4.22 <0.9.0;
 
 contract Faucet {
+
+  address[] public funders;
+
+  receive() external payable{}
+
+  function addFunds() external payable{
+    funders.push(msg.sender);
+  }
+ 
+  
+
+
+  
+
+}
+
+
+// const instance = await Faucet.deployed()
+
+// Block info
+// Nonce - a hash that when combined with the minHash proofs that
+// the block has gone through proof of work(POW)
+// 8 bytes => 64 bits
+
+
   
   // this is a special function
   // it's called when you make a tx that doesn't specify
@@ -10,15 +35,7 @@ contract Faucet {
   // External function are part of the contract interface
   // which means they can be called via contracts and other txs
 
-  receive() external payable{}
 
-  function addFunds() external payable{
-
-  }
- 
-  function justTesting() external pure returns(uint){
-    return 2+2;
-  }
 
   // pure, view - read-only call, no gas free
   // view - it indicates that the function will not alter the storage state in any way
@@ -28,12 +45,3 @@ contract Faucet {
   // read-only call, no gas free
 
   // to talk to the node on the network you can make JSON-RPC http calls
-  
-
-}
-// Block info
-// Nonce - a hash that when combined with the minHash proofs that
-// the block has gone through proof of work(POW)
-// 8 bytes => 64 bits
-
-// const instance = await Faucet.deployed()
