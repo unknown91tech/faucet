@@ -6,8 +6,22 @@ contract Faucet {
   // internal -> can be accesible within smart contract and also derived smart contract
 
     uint public numOfFunders;
+    address public owner;
+
   mapping(address => bool) private funders;
   mapping(uint =>address) private lutfunders;
+
+   constructor() {
+    owner = msg.sender;
+  }
+
+  modifier onlyOwner {
+    require(
+      msg.sender == owner,
+      "Only owner can call this function"
+    );
+    _;
+  }
 
    modifier limitWithdraw(uint withdrawAmount) {
     require(
@@ -26,6 +40,14 @@ contract Faucet {
       funders[funder] = true;
       lutfunders[index] = funder;
     }
+  }
+
+    function test1() external onlyOwner {
+    // some managing stuff that only admin should have access to
+  }
+
+  function test2() external onlyOwner {
+    // some managing stuff that only admin should have access to
   }
 
     function withdraw(uint withdrawAmount) external limitWithdraw(withdrawAmount) {
